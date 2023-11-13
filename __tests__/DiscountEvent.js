@@ -1,5 +1,6 @@
 import ChristmasDdayDiscount from '../src/model/DisCountEvent/ChristmasDdayDiscount';
 import WeekdayDiscount from '../src/model/DisCountEvent/WeekdayDiscount';
+import WeekendDiscount from '../src/model/DisCountEvent/WeekendDiscount';
 import Order from '../src/model/Order';
 import Food from '../src/model/Food';
 import CustomDate from '../src/model/CustomDate';
@@ -85,6 +86,46 @@ describe('DisCountEvent 테스트', () => {
 
       // then
       expect(disCountMoney).toBe(2023 * 3);
+    });
+  });
+
+  describe('WeekendDiscount 테스트', () => {
+    // [요구사항] 주말에는 메인 메뉴를 메뉴 1개당 2,023원 할인
+    test('주말 할인 여부를 체크한다', () => {
+      // given
+      const weekendDiscount = new WeekendDiscount();
+
+      const weekendDate = new CustomDate(2023, 12, 1);
+      const weekDate = new CustomDate(2023, 12, 20);
+      const notAppliedDate = new CustomDate(2023, 11, 20);
+
+      const weekendDateOrder = new Order(foodList, weekendDate);
+      const weekDateDateOrder = new Order(foodList, weekDate);
+      const notAppliedOrder = new Order(foodList, notAppliedDate);
+
+      // when
+      const isApplied = weekendDiscount.isApplicable(weekendDateOrder);
+      const isNotApplied1 = weekendDiscount.isApplicable(weekDateDateOrder);
+      const isNotApplied2 = weekendDiscount.isApplicable(notAppliedOrder);
+      // then
+
+      expect(isApplied).toBe(true);
+      expect(isNotApplied1).toBe(false);
+      expect(isNotApplied2).toBe(false);
+    });
+
+    test('주말 할인 금액을 반환한다', () => {
+      // given
+      const weekendDiscount = new WeekendDiscount();
+      const date = new CustomDate(2023, 12, 1);
+      const order = new Order(foodList, date);
+
+      // when
+      const disCountData = weekendDiscount.getDiscountDetails(order);
+      const disCountMoney = disCountData.content.money.getPrice();
+
+      // then
+      expect(disCountMoney).toBe(2023 * 1);
     });
   });
 });
