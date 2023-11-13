@@ -11,7 +11,7 @@ class Order {
   }
 
   #validate(foodList) {
-    if (foodList.length > 20) {
+    if (this.#getTotalOrderCount(foodList) > 20) {
       throw new Error('[ERROR] 주문 가능한 메뉴의 개수를 초과하였습니다.');
     }
 
@@ -34,6 +34,12 @@ class Order {
     }
   }
 
+  #getTotalOrderCount(foodList) {
+    return foodList.reduce((totalOrderCount, item) => {
+      return totalOrderCount + item.count;
+    }, 0);
+  }
+
   getTotalMoney() {
     return this.#foodList.reduce((totalMoney, item) => {
       const itemPrice = item.food.getMoney();
@@ -44,6 +50,15 @@ class Order {
 
   getDate() {
     return this.#date;
+  }
+
+  getTotalOrderCountByType(type) {
+    return this.#foodList.reduce((totalOrderCountByType, item) => {
+      if (item.food.getType() === type) {
+        return totalOrderCountByType + item.count;
+      }
+      return totalOrderCountByType;
+    }, 0);
   }
 }
 
