@@ -4,6 +4,7 @@ import Menu from '../Menu.js';
 
 class GiftDiscount extends DiscountEvent {
   static GIFT_ITEM = '샴페인';
+  static GIFT_COUNT = 1;
   static CONDITION_AMOUNT = 120_000;
 
   #eventName;
@@ -38,6 +39,7 @@ class GiftDiscount extends DiscountEvent {
       name: this.#eventName,
       content: {
         gift: giftItem,
+        count: GiftDiscount.GIFT_COUNT,
       },
     };
   }

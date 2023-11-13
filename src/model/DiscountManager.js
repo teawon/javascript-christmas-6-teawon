@@ -28,7 +28,13 @@ class DiscountManager {
     let gifts = [];
 
     discountResults.forEach((discount) => {
-      if (discount.content.gift) gifts.push(discount.content.gift);
+      if (discount.content.gift) {
+        const giftWithCount = {
+          gift: discount.content.gift,
+          count: discount.content.count || 1,
+        };
+        gifts.push(giftWithCount);
+      }
     });
 
     return gifts;
@@ -53,7 +59,9 @@ class DiscountManager {
   #calculateTotalGiftValue(discountResults) {
     return discountResults.reduce((total, discount) => {
       if (discount.content.gift) {
-        return total.add(discount.content.gift.getMoney());
+        return total.add(
+          discount.content.gift.getMoney().multiply(discount.content.count),
+        );
       }
       return total;
     }, new Money(0));
