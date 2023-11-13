@@ -62,17 +62,18 @@ describe('DiscountManager 클래스 테스트', () => {
       ]);
     });
 
-    test('총 혜택 금액을 반환한다', () => {
+    test('총 혜택 금액과 증정품 금액을 반환한다', () => {
       // given
       const discountManager = new DiscountManager(order, discount_events);
       const discountResult = discountManager.getDiscountResults();
 
       // when
-      const discountMoney =
+      const { totalDiscount, totalGiftValue } =
         discountManager.calculateTotalDiscountMoney(discountResult);
 
       // then
-      expect(discountMoney.getPrice()).toBe(25000 + 2400);
+      expect(totalDiscount.getPrice()).toBe(2400);
+      expect(totalGiftValue.getPrice()).toBe(25000);
     });
   });
 });

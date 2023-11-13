@@ -44,7 +44,7 @@ class DiscountManager {
     const totalDiscount = this.#calculateTotalDiscount(discountResults);
     const totalGiftValue = this.#calculateTotalGiftValue(discountResults);
 
-    return totalDiscount.add(totalGiftValue);
+    return { totalDiscount, totalGiftValue };
   }
 
   #calculateTotalDiscount(discountResults) {
