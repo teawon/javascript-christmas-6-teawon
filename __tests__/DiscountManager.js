@@ -68,12 +68,12 @@ describe('DiscountManager 클래스 테스트', () => {
       const discountResult = discountManager.getDiscountResults();
 
       // when
-      const { totalDiscount, totalGiftValue } =
-        discountManager.calculateTotalDiscountMoney(discountResult);
+      const { totalDiscountMoney, totalGiftMoney } =
+        discountManager.calculateTotalDiscount(discountResult);
 
       // then
-      expect(totalDiscount.getPrice()).toBe(2400);
-      expect(totalGiftValue.getPrice()).toBe(25000);
+      expect(totalDiscountMoney.getPrice()).toBe(2400);
+      expect(totalGiftMoney.getPrice()).toBe(25000);
     });
   });
 });

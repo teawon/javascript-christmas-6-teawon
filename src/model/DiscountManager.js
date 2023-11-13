@@ -40,14 +40,15 @@ class DiscountManager {
     return gifts;
   }
 
-  calculateTotalDiscountMoney(discountResults) {
-    const totalDiscount = this.#calculateTotalDiscount(discountResults);
-    const totalGiftValue = this.#calculateTotalGiftValue(discountResults);
+  calculateTotalDiscount(discountResults) {
+    const totalDiscountMoney =
+      this.#calculateTotalDiscountMoney(discountResults);
+    const totalGiftMoney = this.#calculateTotalGiftMoney(discountResults);
 
-    return { totalDiscount, totalGiftValue };
+    return { totalDiscountMoney, totalGiftMoney };
   }
 
-  #calculateTotalDiscount(discountResults) {
+  #calculateTotalDiscountMoney(discountResults) {
     return discountResults.reduce((total, discount) => {
       if (discount.content.money) {
         return total.add(discount.content.money);
@@ -56,7 +57,7 @@ class DiscountManager {
     }, new Money(0));
   }
 
-  #calculateTotalGiftValue(discountResults) {
+  #calculateTotalGiftMoney(discountResults) {
     return discountResults.reduce((total, discount) => {
       if (discount.content.gift) {
         return total.add(
