@@ -1,6 +1,7 @@
 import ChristmasDdayDiscount from '../src/model/DisCountEvent/ChristmasDdayDiscount';
 import WeekdayDiscount from '../src/model/DisCountEvent/WeekdayDiscount';
 import WeekendDiscount from '../src/model/DisCountEvent/WeekendDiscount';
+import SpecialDayDiscount from '../src/model/DisCountEvent/SpecialDayDiscount';
 import Order from '../src/model/Order';
 import Food from '../src/model/Food';
 import CustomDate from '../src/model/CustomDate';
@@ -126,6 +127,46 @@ describe('DisCountEvent 테스트', () => {
 
       // then
       expect(disCountMoney).toBe(2023 * 1);
+    });
+  });
+
+  describe('SpecialDayDiscount 테스트', () => {
+    // [요구사항] 이벤트 달력에 별이 있으면 총주문 금액에서 1,000원 할인
+    test('특별 할인 여부를 체크한다', () => {
+      // given
+      const specialDayDiscount = new SpecialDayDiscount();
+
+      const specialDay = new CustomDate(2023, 12, 3);
+      const notSpecialDay = new CustomDate(2023, 12, 4);
+      const notAppliedDate = new CustomDate(2023, 11, 20);
+
+      const specialDayOrder = new Order(foodList, specialDay);
+      const notSpecialDayOrder = new Order(foodList, notSpecialDay);
+      const notAppliedOrder = new Order(foodList, notAppliedDate);
+
+      // when
+      const isApplied = specialDayDiscount.isApplicable(specialDayOrder);
+      const isNotApplied1 = specialDayDiscount.isApplicable(notSpecialDayOrder);
+      const isNotApplied2 = specialDayDiscount.isApplicable(notAppliedOrder);
+      // then
+
+      expect(isApplied).toBe(true);
+      expect(isNotApplied1).toBe(false);
+      expect(isNotApplied2).toBe(false);
+    });
+
+    test('특별 할인 금액을 반환한다', () => {
+      // given
+      const specialDayDiscount = new SpecialDayDiscount();
+      const specialDay = new CustomDate(2023, 12, 3);
+      const order = new Order(foodList, specialDay);
+
+      // when
+      const disCountData = specialDayDiscount.getDiscountDetails(order);
+      const disCountMoney = disCountData.content.money.getPrice();
+
+      // then
+      expect(disCountMoney).toBe(1000);
     });
   });
 });
