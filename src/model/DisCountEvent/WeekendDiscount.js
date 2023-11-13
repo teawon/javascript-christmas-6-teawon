@@ -1,6 +1,6 @@
-import DiscountEvent from './DiscountEvent';
-import CustomDate from '../CustomDate';
-import Money from '../Money';
+import DiscountEvent from './DiscountEvent.js';
+import CustomDate from '../CustomDate.js';
+import Money from '../Money.js';
 
 class WeekendDiscount extends DiscountEvent {
   static DISCOUNT_MENU_TYPE = '메인';

@@ -1,5 +1,5 @@
-import Food from './Food';
-import Money from './Money';
+import Food from './Food.js';
+import Money from './Money.js';
 
 class Menu {
   static FOOD_MENU = {

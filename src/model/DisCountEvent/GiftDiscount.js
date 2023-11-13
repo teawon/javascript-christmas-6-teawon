@@ -1,6 +1,6 @@
-import DiscountEvent from './DiscountEvent';
-import CustomDate from '../CustomDate';
-import Menu from '../Menu';
+import DiscountEvent from './DiscountEvent.js';
+import CustomDate from '../CustomDate.js';
+import Menu from '../Menu.js';
 
 class GiftDiscount extends DiscountEvent {
   static GIFT_ITEM = '샴페인';
