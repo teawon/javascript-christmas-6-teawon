@@ -29,7 +29,7 @@ class ChristmasDdayDiscount extends DiscountEvent {
 
   getDiscountDetails(order) {
     const orderDate = order.getDate();
-    const targetDate = new CustomDate(2023, 12, 25);
+    const targetDate = new CustomDate(2023, 12, 1);
     const diff = targetDate.calculateDiff(orderDate);
     const disCountMoney = new Money(100).multiply(diff).add(new Money(1000));
 

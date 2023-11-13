@@ -32,7 +32,7 @@ describe('DiscountManager 클래스 테스트', () => {
         {
           name: '크리스마스 디데이 할인',
           content: {
-            money: new Money(2000),
+            money: new Money(2400),
           },
         },
         {
@@ -72,7 +72,7 @@ describe('DiscountManager 클래스 테스트', () => {
         discountManager.calculateTotalDiscountMoney(discountResult);
 
       // then
-      expect(discountMoney.getPrice()).toBe(25000 + 2000);
+      expect(discountMoney.getPrice()).toBe(25000 + 2400);
     });
   });
 });

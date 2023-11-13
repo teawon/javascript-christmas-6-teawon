@@ -48,7 +48,7 @@ describe('DisCountEvent 테스트', () => {
       const disCountMoney = disCountData.content.money.getPrice();
 
       // then
-      expect(disCountMoney).toBe(1000 + 100 * 5);
+      expect(disCountMoney).toBe(1000 + 100 * 19);
     });
   });
 
