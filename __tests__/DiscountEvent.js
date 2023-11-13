@@ -2,6 +2,8 @@ import ChristmasDdayDiscount from '../src/model/DisCountEvent/ChristmasDdayDisco
 import WeekdayDiscount from '../src/model/DisCountEvent/WeekdayDiscount';
 import WeekendDiscount from '../src/model/DisCountEvent/WeekendDiscount';
 import SpecialDayDiscount from '../src/model/DisCountEvent/SpecialDayDiscount';
+import GiftDiscount from '../src/model/DisCountEvent/GiftDiscount';
+
 import Order from '../src/model/Order';
 import Food from '../src/model/Food';
 import CustomDate from '../src/model/CustomDate';
@@ -167,6 +169,58 @@ describe('DisCountEvent 테스트', () => {
 
       // then
       expect(disCountMoney).toBe(1000);
+    });
+  });
+
+  describe('GiftDiscount 테스트', () => {
+    // [요구사항]  할인 전 총주문 금액이 12만 원 이상일 때, 샴페인 1개 증정
+    test('증정 이벤트 여부를 체크한다', () => {
+      // given
+      const giftDiscount = new GiftDiscount();
+
+      const appliedDate = new CustomDate(2023, 12, 3);
+      const notAppliedDate = new CustomDate(2023, 11, 20);
+
+      const appliedFoodList = [
+        {
+          food: new Food('양송이수프', new Money(60000), '애피타이저'),
+          count: 1,
+        },
+        { food: new Food('티본스테이크', new Money(60000), '메인'), count: 2 },
+      ];
+
+      const appliedOrder = new Order(appliedFoodList, appliedDate);
+      const notAppliedOrder = new Order(foodList, notAppliedDate);
+
+      // when
+      const isApplied = giftDiscount.isApplicable(appliedOrder);
+      const isNotApplied = giftDiscount.isApplicable(notAppliedOrder);
+      // then
+
+      expect(isApplied).toBe(true);
+      expect(isNotApplied).toBe(false);
+    });
+
+    test('증정 이벤트로 샴페인을 반환한다', () => {
+      // given
+      const giftDiscount = new GiftDiscount();
+      const date = new CustomDate(2023, 12, 3);
+      const foodList = [
+        {
+          food: new Food('양송이수프', new Money(60000), '애피타이저'),
+          count: 1,
+        },
+        { food: new Food('티본스테이크', new Money(60000), '메인'), count: 2 },
+      ];
+
+      const order = new Order(foodList, date);
+
+      // when
+      const disCountData = giftDiscount.getDiscountDetails(order);
+      const giftItem = disCountData.content.gift;
+
+      // then
+      expect(giftItem.getName()).toBe('샴페인');
     });
   });
 });
