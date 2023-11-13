@@ -48,6 +48,18 @@ describe('Money 모델 테스트', () => {
     expect(result.getPrice()).toBe(1000 - 500);
   });
 
+  test('두 Money 객체에 정수를 곱하면, 해당 금액을 가진 새 Money 객체가 반환된다', () => {
+    // given
+    const money1 = new Money(1000);
+    const number = 5;
+
+    // when
+    const result = money1.multiply(5);
+
+    // then
+    expect(result.getPrice()).toBe(1000 * number);
+  });
+
   test('Money 객체에서 더 큰 금액의 Money 객체를 빼려고 하면, 에러가 발생한다', () => {
     // Given: 두 Money 객체
     const money1 = new Money(500);
