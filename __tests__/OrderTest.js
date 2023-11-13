@@ -24,9 +24,26 @@ describe('Order 모델 테스트', () => {
     expect(order.getDate()).toBe(date);
   });
 
+  test('특정 타입에 대한 메뉴 개수를 반환한다', () => {
+    // given
+    const foodList = [
+      { food: food1, count: 2 },
+      { food: drink, count: 3 },
+    ];
+
+    // when
+    const order = new Order(foodList, date);
+
+    // then
+    expect(order.getTotalOrderCountByType('음료')).toBe(3);
+  });
+
   test('주문 가능한 메뉴 개수가 초과하면 에러가 발생한다', () => {
     //given
-    const foodList = new Array(21).fill({ food: food1, count: 1 });
+    const foodList = [
+      { food: food1, count: 11 },
+      { food: food2, count: 10 },
+    ];
 
     //when
     const action = () => {
