@@ -39,6 +39,7 @@ describe('DiscountManager 클래스 테스트', () => {
           name: '증정 이벤트',
           content: {
             gift: FREE_GIFT,
+            count: 1,
           },
         },
       ]);
@@ -53,7 +54,12 @@ describe('DiscountManager 클래스 테스트', () => {
       const giftList = discountManager.getGifts(discountResult);
 
       // when
-      expect(giftList).toStrictEqual([FREE_GIFT]);
+      expect(giftList).toStrictEqual([
+        {
+          gift: FREE_GIFT,
+          count: 1,
+        },
+      ]);
     });
 
     test('총 혜택 금액을 반환한다', () => {
