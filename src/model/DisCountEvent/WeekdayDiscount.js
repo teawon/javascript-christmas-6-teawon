@@ -27,7 +27,7 @@ class WeekdayDiscount extends DiscountEvent {
       return false;
     if (order.getTotalMoney().getPrice() < 10000) return false;
 
-    if (!orderDate.isWeekday()) return false;
+    if (orderDate.isWeekend()) return false;
 
     return true;
   }
