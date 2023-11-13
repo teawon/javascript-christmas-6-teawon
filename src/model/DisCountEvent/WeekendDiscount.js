@@ -29,6 +29,12 @@ class WeekendDiscount extends DiscountEvent {
 
     if (orderDate.isWeekday()) return false;
 
+    const disCountTypeCount = order.getTotalOrderCountByType(
+      WeekendDiscount.DISCOUNT_MENU_TYPE,
+    );
+
+    if (disCountTypeCount < 1) return false;
+
     return true;
   }
 
