@@ -30,6 +30,11 @@ class Money {
     return new Money(minusPrice);
   }
 
+  multiply(number) {
+    const multiplyedPrice = this.#price * number;
+    return new Money(multiplyedPrice);
+  }
+
   getPrice() {
     return this.#price;
   }
