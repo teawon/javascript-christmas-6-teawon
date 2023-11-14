@@ -1,11 +1,9 @@
 import ValidationUtils from './Utils/ValidationUtils.js';
+import { ERROR_MESSAGE } from './message.js';
 
 const RestaurantValidator = {
   validateBadgeModel(name) {
-    ValidationUtils.validateNotNull(
-      name,
-      '[ERROR] 빈 문자열의 배지는 존재할 수 없습니다.',
-    );
+    ValidationUtils.validateNotNull(name, ERROR_MESSAGE.emptyBadge);
   },
 
   validateCustomDateModel(year, month, day) {
@@ -15,36 +13,32 @@ const RestaurantValidator = {
       date.getMonth() + 1 !== month ||
       date.getDate() !== day
     ) {
-      throw new Error('[ERROR] 유효하지 않은 날짜입니다.');
+      throw new Error(ERROR_MESSAGE.invalidDate);
     }
   },
 
   validateFoodModel(name, type, menuType) {
-    ValidationUtils.validateNotNull(name, '[ERROR] 메뉴 이름은 필수입니다.');
+    ValidationUtils.validateNotNull(name, ERROR_MESSAGE.emptyMenuName);
     ValidationUtils.validateIncluded(
       type,
       menuType,
-      '[ERROR] 존재하지 않는 메뉴 타입입니다.',
+      ERROR_MESSAGE.invalidMenuType,
     );
   },
 
   validateExistMenu(menu) {
-    ValidationUtils.validateNotNull(menu, '[ERROR] 존재하지 않는 메뉴입니다.');
+    ValidationUtils.validateNotNull(menu, ERROR_MESSAGE.nonexistentMenu);
   },
 
   validateMoneyModel(price) {
-    ValidationUtils.validateMinLen(
-      price,
-      0,
-      '[ERROR] 금액은 음수가 될 수 없습니다.',
-    );
+    ValidationUtils.validateMinLen(price, 0, ERROR_MESSAGE.negativePrice);
   },
 
   validateMoneyType(money, moneyType) {
     ValidationUtils.validateTypeCheck(
       money,
       moneyType,
-      '[ERROR] 유효하지 않은 Money 객체입니다.',
+      ERROR_MESSAGE.invalidMoneyObject,
     );
   },
 
@@ -52,27 +46,27 @@ const RestaurantValidator = {
     ValidationUtils.validateMaxLen(
       orderMenuCount,
       20,
-      '[ERROR] 주문 가능한 메뉴의 개수를 초과하였습니다.',
+      ERROR_MESSAGE.orderCountExceeded,
     );
 
     ValidationUtils.validateMinLen(
       foodList.length,
       1,
-      '[ERROR] 하나 이상의 메뉴를 주문해야합니다.',
+      ERROR_MESSAGE.noMenuOrdered,
     );
 
     const menuNames = foodList.map((item) => item.food.getName());
     ValidationUtils.validateNotDuplicate(
       menuNames,
-      '[ERROR] 중복된 메뉴를 주문할 수 없습니다.',
+      ERROR_MESSAGE.duplicateMenu,
     );
 
     if (foodList.every((item) => item.food.getType() === '음료')) {
-      throw new Error('[ERROR] 음료만 주문할 수 없습니다.');
+      throw new Error(ERROR_MESSAGE.beverageOnly);
     }
 
     if (foodList.some((item) => item.count < 1)) {
-      throw new Error('[ERROR] 각 메뉴는 적어도 1개 이상을 주문해야합니다.');
+      throw new Error(ERROR_MESSAGE.minimumOneMenu);
     }
   },
 };

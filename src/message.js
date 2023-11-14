@@ -28,4 +28,16 @@ export const INPUT_MESSAGE = Object.freeze({
 export const ERROR_MESSAGE = Object.freeze({
   enterVisitDate: '[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.',
   enterOrder: '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.',
+  emptyBadge: '[ERROR] 빈 문자열의 배지는 존재할 수 없습니다.',
+  invalidDate: '[ERROR] 유효하지 않은 날짜입니다.',
+  emptyMenuName: '[ERROR] 메뉴 이름은 필수입니다.',
+  invalidMenuType: '[ERROR] 존재하지 않는 메뉴 타입입니다.',
+  nonexistentMenu: '[ERROR] 존재하지 않는 메뉴입니다.',
+  negativePrice: '[ERROR] 금액은 음수가 될 수 없습니다.',
+  invalidMoneyObject: '[ERROR] 유효하지 않은 Money 객체입니다.',
+  orderCountExceeded: '[ERROR] 주문 가능한 메뉴의 개수를 초과하였습니다.',
+  noMenuOrdered: '[ERROR] 하나 이상의 메뉴를 주문해야합니다.',
+  duplicateMenu: '[ERROR] 중복된 메뉴를 주문할 수 없습니다.',
+  beverageOnly: '[ERROR] 음료만 주문할 수 없습니다.',
+  minimumOneMenu: '[ERROR] 각 메뉴는 적어도 1개 이상을 주문해야합니다.',
 });
