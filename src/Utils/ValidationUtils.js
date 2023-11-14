@@ -11,12 +11,6 @@ const ValidationUtils = {
     }
   },
 
-  validatePositiveNumber(input, message) {
-    if (input < 0) {
-      throw new Error(message);
-    }
-  },
-
   validateTypeCheck(input, type, message) {
     if (!(input instanceof type)) {
       throw new Error(message);

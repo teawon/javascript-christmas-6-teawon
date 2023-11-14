@@ -33,8 +33,9 @@ const RestaurantValidator = {
   },
 
   validateMoneyModel(price) {
-    ValidationUtils.validatePositiveNumber(
+    ValidationUtils.validateMinLen(
       price,
+      0,
       '[ERROR] 금액은 음수가 될 수 없습니다.',
     );
   },
