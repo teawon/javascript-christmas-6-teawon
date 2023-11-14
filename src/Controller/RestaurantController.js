@@ -29,8 +29,7 @@ class RestaurantController {
   async start() {
     OutputView.printWelcome();
     const visitDate = await this.#getVisitDate();
-    const orderMenu = await this.#getOrderMenu();
-    const order = new Order(orderMenu, visitDate);
+    const order = await this.#getOrder(visitDate);
 
     this.#printEventPreview(visitDate);
     this.#printMenu(order);
@@ -74,7 +73,7 @@ class RestaurantController {
     return await getInputWithValidation(inputFuction, errorMessage);
   }
 
-  async #getOrderMenu() {
+  async #getOrder(visitDate) {
     const inputFuction = async () => {
       const orderMenuInput = await InputView.readOrderMenu();
 
@@ -84,8 +83,9 @@ class RestaurantController {
         const food = Menu.getFood(name);
         return { food, count: Number(count) };
       });
-      //TODO Validation 및 재 입력받기
-      return orderMenu;
+
+      const order = new Order(orderMenu, visitDate);
+      return order;
     };
     const errorMessage =
       '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.';
