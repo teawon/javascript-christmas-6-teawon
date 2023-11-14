@@ -1,5 +1,6 @@
 import ValidationUtils from './Utils/ValidationUtils.js';
 import { ERROR_MESSAGE } from './message.js';
+import { MENU_TYPES } from './constants.js';
 
 const RestaurantValidator = {
   validateBadgeModel(name) {
@@ -42,10 +43,10 @@ const RestaurantValidator = {
     );
   },
 
-  validateOrderModel(foodList, orderMenuCount) {
+  validateOrderModel(foodList, orderMenuCount, maxCount) {
     ValidationUtils.validateMaxLen(
       orderMenuCount,
-      20,
+      maxCount,
       ERROR_MESSAGE.orderCountExceeded,
     );
 
@@ -61,7 +62,7 @@ const RestaurantValidator = {
       ERROR_MESSAGE.duplicateMenu,
     );
 
-    if (foodList.every((item) => item.food.getType() === '음료')) {
+    if (foodList.every((item) => item.food.getType() === MENU_TYPES.beverage)) {
       throw new Error(ERROR_MESSAGE.beverageOnly);
     }
 

@@ -2,12 +2,18 @@ import RestaurantValidator from '../RestaurantValidator.js';
 import Money from './Money.js';
 
 class Order {
+  static MAX_ORDER_COUNT = 20;
+
   #foodList;
   #date;
 
   constructor(foodList, date) {
     const orderMenuCount = this.#getTotalOrderCount(foodList);
-    RestaurantValidator.validateOrderModel(foodList, orderMenuCount);
+    RestaurantValidator.validateOrderModel(
+      foodList,
+      orderMenuCount,
+      Order.MAX_ORDER_COUNT,
+    );
     this.#foodList = foodList;
     this.#date = date;
   }
