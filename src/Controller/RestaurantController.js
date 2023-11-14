@@ -1,6 +1,6 @@
-import Money from '../model/Money.js';
 import Menu from '../model/Menu.js';
 import Order from '../model/Order.js';
+import Money from '../model/Money.js';
 import EventBadgeManager from '../model/EventBadgeManager.js';
 import CustomDate from '../model/CustomDate.js';
 import DiscountManager from '../model/DiscountManager.js';
@@ -11,6 +11,7 @@ import WeekendDiscount from '../model/DisCountEvent/WeekendDiscount.js';
 import SpecialDayDiscount from '../model/DisCountEvent/SpecialDayDiscount.js';
 import OutputView from '../Views/OutputView.js';
 import InputView from '../Views/InputView.js';
+import { getInputWithValidation } from '../Utils/iuput.js';
 
 class RestaurantController {
   #discountEvents;
@@ -62,25 +63,34 @@ class RestaurantController {
   }
 
   async #getVisitDate() {
-    const dateInput = await InputView.readDate();
+    const inputFuction = async () => {
+      const dateInput = await InputView.readDate();
+      const visitDate = new CustomDate(2023, 12, Number(dateInput));
+      return visitDate;
+    };
+    const errorMessage =
+      '[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.';
 
-    //TODO Validation 및 재 입력받기
-    const visitDate = new CustomDate(2023, 12, Number(dateInput));
-
-    return visitDate;
+    return await getInputWithValidation(inputFuction, errorMessage);
   }
 
   async #getOrderMenu() {
-    const orderMenuInput = await InputView.readOrderMenu();
+    const inputFuction = async () => {
+      const orderMenuInput = await InputView.readOrderMenu();
 
-    const orderMenuList = orderMenuInput.split(',');
-    const orderMenu = orderMenuList.map((menu) => {
-      const [name, count] = menu.split('-');
-      const food = Menu.getFood(name);
-      return { food, count: Number(count) };
-    });
-    //TODO Validation 및 재 입력받기
-    return orderMenu;
+      const orderMenuList = orderMenuInput.split(',');
+      const orderMenu = orderMenuList.map((menu) => {
+        const [name, count] = menu.split('-');
+        const food = Menu.getFood(name);
+        return { food, count: Number(count) };
+      });
+      //TODO Validation 및 재 입력받기
+      return orderMenu;
+    };
+    const errorMessage =
+      '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.';
+
+    return await getInputWithValidation(inputFuction, errorMessage);
   }
 
   #printMenu(order) {
