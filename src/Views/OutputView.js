@@ -62,6 +62,10 @@ const OutputView = {
 
     Console.print(eventBadgeName);
   },
+
+  printLine() {
+    Console.print('');
+  },
 };
 
 export default OutputView;

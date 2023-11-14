@@ -11,7 +11,6 @@ import WeekendDiscount from '../model/DisCountEvent/WeekendDiscount.js';
 import SpecialDayDiscount from '../model/DisCountEvent/SpecialDayDiscount.js';
 import OutputView from '../Views/OutputView.js';
 import InputView from '../Views/InputView.js';
-import { Console } from '@woowacourse/mission-utils';
 
 class RestaurantController {
   #discountEvents;
@@ -91,18 +90,21 @@ class RestaurantController {
       count: foodList.count,
     }));
     OutputView.printMenu(orderMenuData);
+    OutputView.printLine();
   }
 
   #printEventPreview(visitDate) {
     const month = visitDate.getMonth();
     const day = visitDate.getDay();
     OutputView.printEventPreview(month, day);
+    OutputView.printLine();
   }
 
   #printTotalOrderPrice(order) {
     const totalOrderMoney = order.getTotalMoney();
     const totalOrderPrice = totalOrderMoney.getPrice();
     OutputView.printTotalOrderPrice(totalOrderPrice);
+    OutputView.printLine();
   }
 
   #printGiftMenu(gifts) {
@@ -111,6 +113,7 @@ class RestaurantController {
       count: item.count,
     }));
     OutputView.printGiftMenu(giftsData);
+    OutputView.printLine();
   }
 
   #printBenefitDetails(discountResult) {
@@ -126,17 +129,20 @@ class RestaurantController {
       return { name: discount.name, amount: money };
     });
     OutputView.printBenefitDetails(discountDatas);
+    OutputView.printLine();
   }
 
   #printTotalBenefit(totalProfitMoney) {
     const totalProfitPrice = totalProfitMoney.getPrice();
     OutputView.printTotalBenefit(totalProfitPrice);
+    OutputView.printLine();
   }
 
   #printFinalPaymentPrice(order, totalDiscountMoney) {
     const finalPaymentMoney = order.getTotalMoney().minus(totalDiscountMoney);
     const finalPaymentPrice = finalPaymentMoney.getPrice();
     OutputView.printFinalPaymentPrice(finalPaymentPrice);
+    OutputView.printLine();
   }
 
   #printEventBadge(eventBadge) {
