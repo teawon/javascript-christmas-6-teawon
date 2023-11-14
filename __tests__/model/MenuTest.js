@@ -1,5 +1,5 @@
-import Menu from '../../src/model/Menu.js';
-import Food from '../../src/model/Food';
+import Menu from '../../src/Model/Menu.js';
+import Food from '../../src/Model/Food';
 
 describe('Menu 모델 테스트', () => {
   test('판매중인 이름의 메뉴가 있다면 해당 음식 인스턴스를 반환한다', () => {

@@ -1,7 +1,7 @@
-import Order from '../model/Order.js';
-import Money from '../model/Money.js';
-import CustomDate from '../model/CustomDate.js';
-import DiscountManager from '../model/DiscountManager.js';
+import Order from '../Model/Order.js';
+import Money from '../Model/Money.js';
+import CustomDate from '../Model/CustomDate.js';
+import DiscountManager from '../Model/DiscountManager.js';
 import { getInputWithValidation } from '../Utils/iuput.js';
 import { ERROR_MESSAGE } from '../message.js';
 

@@ -1,5 +1,5 @@
-import EventBadgeManager from '../../src/model/EventBadgeManager';
-import Money from '../../src/model/Money';
+import EventBadgeManager from '../../src/Model/EventBadgeManager';
+import Money from '../../src/Model/Money';
 
 describe('EventBadgeManager 모델 테스트', () => {
   test.each([

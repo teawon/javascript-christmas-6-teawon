@@ -1,4 +1,4 @@
-import Money from '../../src/model/Money.js';
+import Money from '../../src/Model/Money.js';
 
 describe('Money 모델 테스트', () => {
   test('양수 금액으로 Money객체를 생성하면 해당 금액을 가진 객체가 생성된다', () => {

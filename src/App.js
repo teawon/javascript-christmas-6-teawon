@@ -1,13 +1,13 @@
 import RestaurantController from './Controller/RestaurantController.js';
-import ChristmasDdayDiscount from './model/DisCountEvent/ChristmasDdayDiscount.js';
-import GiftDiscount from './model/DisCountEvent/GiftDiscount.js';
-import WeekdayDiscount from './model/DisCountEvent/WeekdayDiscount.js';
-import WeekendDiscount from './model/DisCountEvent/WeekendDiscount.js';
-import SpecialDayDiscount from './model/DisCountEvent/SpecialDayDiscount.js';
+import ChristmasDdayDiscount from './Model/DisCountEvent/ChristmasDdayDiscount.js';
+import GiftDiscount from './Model/DisCountEvent/GiftDiscount.js';
+import WeekdayDiscount from './Model/DisCountEvent/WeekdayDiscount.js';
+import WeekendDiscount from './Model/DisCountEvent/WeekendDiscount.js';
+import SpecialDayDiscount from './Model/DisCountEvent/SpecialDayDiscount.js';
 import OutputView from './Views/OutputView.js';
 import InputView from './Views/InputView.js';
-import Menu from './model/Menu.js';
-import EventBadgeManager from './model/EventBadgeManager.js';
+import Menu from './Model/Menu.js';
+import EventBadgeManager from './Model/EventBadgeManager.js';
 
 class App {
   async run() {

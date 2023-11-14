@@ -1,11 +1,11 @@
-import DiscountManager from '../../src/model/DiscountManager';
-import ChristmasDdayDiscount from '../../src/model/DisCountEvent/ChristmasDdayDiscount';
-import GiftDiscount from '../../src/model/DisCountEvent/GiftDiscount';
+import DiscountManager from '../../src/Model/DiscountManager';
+import ChristmasDdayDiscount from '../../src/Model/DisCountEvent/ChristmasDdayDiscount';
+import GiftDiscount from '../../src/Model/DisCountEvent/GiftDiscount';
 
-import Money from '../../src/model/Money';
-import Food from '../../src/model/Food';
-import CustomDate from '../../src/model/CustomDate';
-import Order from '../../src/model/Order';
+import Money from '../../src/Model/Money';
+import Food from '../../src/Model/Food';
+import CustomDate from '../../src/Model/CustomDate';
+import Order from '../../src/Model/Order';
 
 describe('DiscountManager 클래스 테스트', () => {
   const discount_events = [new ChristmasDdayDiscount(), new GiftDiscount()];
