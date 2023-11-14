@@ -1,3 +1,5 @@
+import RestaurantValidator from '../RestaurantValidator.js';
+
 import Food from './Food.js';
 import Money from './Money.js';
 
@@ -55,9 +57,7 @@ class Menu {
 
   static getFood(name) {
     const menuInfo = Menu.FOOD_MENU[name];
-    if (!menuInfo) {
-      throw new Error('[ERROR] 존재하지 않는 메뉴입니다.');
-    }
+    RestaurantValidator.validateExistMenu(menuInfo);
 
     const { price, type } = menuInfo;
     const food = new Food(name, new Money(price), type);

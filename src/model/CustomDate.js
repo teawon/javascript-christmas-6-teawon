@@ -1,23 +1,14 @@
+import RestaurantValidator from '../RestaurantValidator.js';
+
 class CustomDate {
   static DAYS_OF_WEEK = ['일', '월', '화', '수', '목', '금', '토'];
 
   #date;
 
   constructor(year, month, day) {
-    this.#validate(year, month, day);
+    RestaurantValidator.validateCustomDateModel(year, month, day);
     const monthIndex = month - 1;
     this.#date = new Date(year, monthIndex, day);
-  }
-
-  #validate(year, month, day) {
-    const date = new Date(year, month - 1, day);
-    if (
-      date.getFullYear() !== year ||
-      date.getMonth() + 1 !== month ||
-      date.getDate() !== day
-    ) {
-      throw new Error('[ERROR] 유효하지 않은 날짜입니다.');
-    }
   }
 
   equal(other) {
