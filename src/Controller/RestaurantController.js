@@ -126,7 +126,7 @@ class RestaurantController {
         money = money.add(discount.content.money);
       }
 
-      return { name: discount.name, amount: money };
+      return { name: discount.name, amount: money.getPrice() };
     });
     OutputView.printBenefitDetails(discountDatas);
     OutputView.printLine();
