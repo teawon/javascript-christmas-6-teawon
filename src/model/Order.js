@@ -52,6 +52,10 @@ class Order {
     return this.#date;
   }
 
+  getFoodList() {
+    return this.#foodList;
+  }
+
   getTotalOrderCountByType(type) {
     return this.#foodList.reduce((totalOrderCountByType, item) => {
       if (item.food.getType() === type) {
