@@ -53,6 +53,14 @@ class CustomDate {
     return this.#date;
   }
 
+  getMonth() {
+    return this.#date.getMonth() + 1;
+  }
+
+  getDay() {
+    return this.#date.getDate();
+  }
+
   calculateDiff(otherDate) {
     const oneDay = 24 * 60 * 60 * 1000;
     const difference = otherDate.getDate() - this.#date;
