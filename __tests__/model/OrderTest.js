@@ -1,6 +1,6 @@
-import Order from '../src/model/Order';
-import Food from '../src/model/Food';
-import Money from '../src/model/Money';
+import Order from '../../src/model/Order';
+import Food from '../../src/model/Food';
+import Money from '../../src/model/Money';
 
 describe('Order 모델 테스트', () => {
   const food1 = new Food('양송이수프', new Money(6000), '애피타이저');

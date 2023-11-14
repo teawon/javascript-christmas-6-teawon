@@ -1,5 +1,5 @@
-import Food from '../src/model/Food.js';
-import Money from '../src/model/Money.js';
+import Food from '../../src/model/Food.js';
+import Money from '../../src/model/Money.js';
 
 describe('Food 모델 테스트', () => {
   test('이름, 금액, 타입 정보가 유효하다면 Food객체가 생성된다', () => {

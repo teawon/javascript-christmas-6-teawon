@@ -1,4 +1,4 @@
-import CustomDate from '../src/model/CustomDate.js';
+import CustomDate from '../../src/model/CustomDate.js';
 
 describe('CustomDate 모델 테스트', () => {
   test('유효한 날짜 정보가 들어오면, 해당 정보를 가진 객체를 생성한다', () => {

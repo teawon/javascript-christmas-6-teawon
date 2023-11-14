@@ -1,4 +1,4 @@
-import Badge from '../src/model/Badge';
+import Badge from '../../src/model/Badge';
 
 describe('Badge 모델 테스트', () => {
   test('입력한 이름을 가지는 뱃지 객체를 생성한다', () => {

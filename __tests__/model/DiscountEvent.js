@@ -1,13 +1,13 @@
-import ChristmasDdayDiscount from '../src/model/DisCountEvent/ChristmasDdayDiscount';
-import WeekdayDiscount from '../src/model/DisCountEvent/WeekdayDiscount';
-import WeekendDiscount from '../src/model/DisCountEvent/WeekendDiscount';
-import SpecialDayDiscount from '../src/model/DisCountEvent/SpecialDayDiscount';
-import GiftDiscount from '../src/model/DisCountEvent/GiftDiscount';
+import ChristmasDdayDiscount from '../../src/model/DisCountEvent/ChristmasDdayDiscount';
+import WeekdayDiscount from '../../src/model/DisCountEvent/WeekdayDiscount';
+import WeekendDiscount from '../../src/model/DisCountEvent/WeekendDiscount';
+import SpecialDayDiscount from '../../src/model/DisCountEvent/SpecialDayDiscount';
+import GiftDiscount from '../../src/model/DisCountEvent/GiftDiscount';
 
-import Order from '../src/model/Order';
-import Food from '../src/model/Food';
-import CustomDate from '../src/model/CustomDate';
-import Money from '../src/model/Money';
+import Order from '../../src/model/Order';
+import Food from '../../src/model/Food';
+import CustomDate from '../../src/model/CustomDate';
+import Money from '../../src/model/Money';
 
 describe('DisCountEvent 테스트', () => {
   const foodList = [
