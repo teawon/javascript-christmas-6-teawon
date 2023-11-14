@@ -39,6 +39,11 @@ const OutputView = {
   printBenefitDetails(discountDatas) {
     Console.print('<혜택 내역>');
 
+    if (discountDatas.length === 0) {
+      Console.print('없음');
+      return;
+    }
+
     discountDatas.forEach((discount) => {
       Console.print(
         `${discount.name}: -${formatNumberToKRW(discount.amount)}원`,
