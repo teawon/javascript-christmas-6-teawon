@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-
+import { formatNumberToKRW } from '../Utils/formatter.js';
 const OutputView = {
   printWelcome() {
     Console.print('안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.');
@@ -20,7 +20,7 @@ const OutputView = {
 
   printTotalOrderPrice(totalOrderPrice) {
     Console.print('<할인 전 총주문 금액>');
-    Console.print(`${totalOrderPrice}원`);
+    Console.print(`${formatNumberToKRW(totalOrderPrice)}원`);
   },
 
   printGiftMenu(giftsData) {
@@ -40,18 +40,20 @@ const OutputView = {
     Console.print('<혜택 내역>');
 
     discountDatas.forEach((discount) => {
-      Console.print(`${discount.name}: -${discount.amount.getPrice()}원`);
+      Console.print(
+        `${discount.name}: -${formatNumberToKRW(discount.amount)}원`,
+      );
     });
   },
 
   printTotalBenefit(totalProfitPrice) {
     Console.print('<총혜택 금액>');
-    Console.print(`-${totalProfitPrice}원`);
+    Console.print(`-${formatNumberToKRW(totalProfitPrice)}원`);
   },
 
   printFinalPaymentPrice(finalPaymentPrice) {
     Console.print('<할인 후 예상 결제 금액>');
-    Console.print(`${finalPaymentPrice}원`);
+    Console.print(`${formatNumberToKRW(finalPaymentPrice)}원`);
   },
 
   printEventBadge(eventBadgeName) {
