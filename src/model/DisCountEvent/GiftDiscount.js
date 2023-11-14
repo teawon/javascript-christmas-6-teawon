@@ -1,9 +1,10 @@
 import DiscountEvent from './DiscountEvent.js';
 import CustomDate from '../CustomDate.js';
 import Menu from '../Menu.js';
+import { EVENT_NAMES, MENU_NAMES } from '../../constants.js';
 
 class GiftDiscount extends DiscountEvent {
-  static GIFT_ITEM = '샴페인';
+  static GIFT_ITEM = MENU_NAMES.champagne;
   static GIFT_COUNT = 1;
   static CONDITION_AMOUNT = 120_000;
 
@@ -12,7 +13,7 @@ class GiftDiscount extends DiscountEvent {
 
   constructor() {
     super();
-    this.#eventName = '증정 이벤트';
+    this.#eventName = EVENT_NAMES.freeGift;
     this.#appliedPeriod = {
       start: new CustomDate(2023, 12, 1),
       end: new CustomDate(2023, 12, 31),
@@ -32,7 +33,7 @@ class GiftDiscount extends DiscountEvent {
     return true;
   }
 
-  getDiscountDetails(order) {
+  getDiscountDetails() {
     const giftItem = Menu.getFood(GiftDiscount.GIFT_ITEM);
 
     return {

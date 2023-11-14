@@ -1,6 +1,7 @@
 import DiscountEvent from './DiscountEvent.js';
 import CustomDate from '../CustomDate.js';
 import Money from '../Money.js';
+import { EVENT_NAMES } from '../../constants.js';
 
 class SpecialDayDiscount extends DiscountEvent {
   static SPECIAL_DAY = [
@@ -19,7 +20,7 @@ class SpecialDayDiscount extends DiscountEvent {
 
   constructor() {
     super();
-    this.#eventName = '특별 할인';
+    this.#eventName = EVENT_NAMES.specialDay;
     this.#appliedPeriod = {
       start: new CustomDate(2023, 12, 1),
       end: new CustomDate(2023, 12, 31),

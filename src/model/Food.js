@@ -1,7 +1,12 @@
 import RestaurantValidator from '../RestaurantValidator.js';
-
+import { MENU_TYPES } from '../constants.js';
 class Food {
-  static MENU_TYPES = ['애피타이저', '메인', '디저트', '음료'];
+  static MENU_TYPES = [
+    MENU_TYPES.appetizer,
+    MENU_TYPES.main,
+    MENU_TYPES.dessert,
+    MENU_TYPES.beverage,
+  ];
 
   #name;
   #money;

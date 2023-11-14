@@ -1,9 +1,9 @@
 import DiscountEvent from './DiscountEvent.js';
 import CustomDate from '../CustomDate.js';
 import Money from '../Money.js';
-
+import { MENU_TYPES, EVENT_NAMES } from '../../constants.js';
 class WeekendDiscount extends DiscountEvent {
-  static DISCOUNT_MENU_TYPE = '메인';
+  static DISCOUNT_MENU_TYPE = MENU_TYPES.main;
   static DISCOUNT_AMOUNT = 2023;
 
   #eventName;
@@ -11,7 +11,7 @@ class WeekendDiscount extends DiscountEvent {
 
   constructor() {
     super();
-    this.#eventName = '주말 할인';
+    this.#eventName = EVENT_NAMES.weekend;
     this.#appliedPeriod = {
       start: new CustomDate(2023, 12, 1),
       end: new CustomDate(2023, 12, 31),

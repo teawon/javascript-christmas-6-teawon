@@ -1,57 +1,57 @@
 import RestaurantValidator from '../RestaurantValidator.js';
-
 import Food from './Food.js';
 import Money from './Money.js';
+import { MENU_NAMES, MENU_TYPES } from '../constants.js';
 
 class Menu {
   static FOOD_MENU = {
-    양송이수프: {
+    [MENU_NAMES.mushroomSoup]: {
       price: 6000,
-      type: '애피타이저',
+      type: MENU_TYPES.appetizer,
     },
-    타파스: {
+    [MENU_NAMES.tapas]: {
       price: 5500,
-      type: '애피타이저',
+      type: MENU_TYPES.appetizer,
     },
-    시저샐러드: {
+    [MENU_NAMES.caesarSalad]: {
       price: 8000,
-      type: '애피타이저',
+      type: MENU_TYPES.appetizer,
     },
-    티본스테이크: {
+    [MENU_NAMES.tBoneSteak]: {
       price: 55000,
-      type: '메인',
+      type: MENU_TYPES.main,
     },
-    바비큐립: {
+    [MENU_NAMES.bbqRibs]: {
       price: 54000,
-      type: '메인',
+      type: MENU_TYPES.main,
     },
-    해산물파스타: {
+    [MENU_NAMES.seafoodPasta]: {
       price: 35000,
-      type: '메인',
+      type: MENU_TYPES.main,
     },
-    크리스마스파스타: {
+    [MENU_NAMES.christmasPasta]: {
       price: 25000,
-      type: '메인',
+      type: MENU_TYPES.main,
     },
-    초코케이크: {
+    [MENU_NAMES.chocoCake]: {
       price: 15000,
-      type: '디저트',
+      type: MENU_TYPES.dessert,
     },
-    아이스크림: {
+    [MENU_NAMES.iceCream]: {
       price: 5000,
-      type: '디저트',
+      type: MENU_TYPES.dessert,
     },
-    제로콜라: {
+    [MENU_NAMES.zeroCola]: {
       price: 3000,
-      type: '음료',
+      type: MENU_TYPES.beverage,
     },
-    레드와인: {
+    [MENU_NAMES.redWine]: {
       price: 60000,
-      type: '음료',
+      type: MENU_TYPES.beverage,
     },
-    샴페인: {
+    [MENU_NAMES.champagne]: {
       price: 25000,
-      type: '음료',
+      type: MENU_TYPES.beverage,
     },
   };
 
