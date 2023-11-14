@@ -1,8 +1,6 @@
 import RestaurantValidator from '../RestaurantValidator.js';
-
+import { DAYS_OF_WEEK } from '../constants.js';
 class CustomDate {
-  static DAYS_OF_WEEK = ['일', '월', '화', '수', '목', '금', '토'];
-
   #date;
 
   constructor(year, month, day) {
@@ -21,13 +19,16 @@ class CustomDate {
   }
 
   getDayOfWeek() {
-    return CustomDate.DAYS_OF_WEEK[this.#date.getDay()];
+    const dayIndex = this.#date.getDay();
+    const dayKeys = Object.keys(DAYS_OF_WEEK);
+    return DAYS_OF_WEEK[dayKeys[dayIndex]];
   }
 
   isWeekend() {
-    const dayOfWeek = this.#date.getDay();
-    // 5: 금요일 , 6: 토요일
-    return dayOfWeek === 5 || dayOfWeek === 6;
+    const dayIndex = this.#date.getDay();
+    return (
+      dayIndex === DAYS_OF_WEEK.friday || dayIndex === DAYS_OF_WEEK.saturday
+    );
   }
 
   isWeekday() {
