@@ -3,6 +3,7 @@ import Money from '../model/Money.js';
 import CustomDate from '../model/CustomDate.js';
 import DiscountManager from '../model/DiscountManager.js';
 import { getInputWithValidation } from '../Utils/iuput.js';
+import { ERROR_MESSAGE } from '../message.js';
 
 class RestaurantController {
   #menu;
@@ -60,16 +61,16 @@ class RestaurantController {
       const visitDate = new CustomDate(2023, 12, Number(dateInput));
       return visitDate;
     };
-    const errorMessage =
-      '[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.';
 
-    return await getInputWithValidation(inputFuction, errorMessage);
+    return await getInputWithValidation(
+      inputFuction,
+      ERROR_MESSAGE.enterVisitDate,
+    );
   }
 
   async #getOrder(visitDate) {
     const inputFuction = async () => {
       const orderMenuInput = await this.#inputView.readOrderMenu();
-
       const orderMenuList = orderMenuInput.split(',');
       const orderMenu = orderMenuList.map((menu) => {
         const [name, count] = menu.split('-');
@@ -80,10 +81,8 @@ class RestaurantController {
       const order = new Order(orderMenu, visitDate);
       return order;
     };
-    const errorMessage =
-      '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.';
 
-    return await getInputWithValidation(inputFuction, errorMessage);
+    return await getInputWithValidation(inputFuction, ERROR_MESSAGE.enterOrder);
   }
 
   #printMenu(order) {
