@@ -1,33 +1,26 @@
-import Menu from '../model/Menu.js';
 import Order from '../model/Order.js';
 import Money from '../model/Money.js';
-import EventBadgeManager from '../model/EventBadgeManager.js';
 import CustomDate from '../model/CustomDate.js';
 import DiscountManager from '../model/DiscountManager.js';
-import ChristmasDdayDiscount from '../model/DisCountEvent/ChristmasDdayDiscount.js';
-import GiftDiscount from '../model/DisCountEvent/GiftDiscount.js';
-import WeekdayDiscount from '../model/DisCountEvent/WeekdayDiscount.js';
-import WeekendDiscount from '../model/DisCountEvent/WeekendDiscount.js';
-import SpecialDayDiscount from '../model/DisCountEvent/SpecialDayDiscount.js';
-import OutputView from '../Views/OutputView.js';
-import InputView from '../Views/InputView.js';
 import { getInputWithValidation } from '../Utils/iuput.js';
 
 class RestaurantController {
+  #menu;
+  #eventBadgeManager;
   #discountEvents;
+  #outputView;
+  #inputView;
 
-  constructor() {
-    this.#discountEvents = [
-      new ChristmasDdayDiscount(),
-      new GiftDiscount(),
-      new WeekdayDiscount(),
-      new WeekendDiscount(),
-      new SpecialDayDiscount(),
-    ];
+  constructor(menu, eventBadgeManager, discountEvents, outputView, inputView) {
+    this.#menu = menu;
+    this.#eventBadgeManager = eventBadgeManager;
+    this.#discountEvents = discountEvents;
+    this.#outputView = outputView;
+    this.#inputView = inputView;
   }
 
   async start() {
-    OutputView.printWelcome();
+    this.#outputView.printWelcome();
     const visitDate = await this.#getVisitDate();
     const order = await this.#getOrder(visitDate);
 
@@ -40,7 +33,7 @@ class RestaurantController {
 
     this.#printFinalPaymentPrice(order, totalDiscountMoney);
 
-    const eventBadge = EventBadgeManager.getEventBadge(totalProfitMoney);
+    const eventBadge = this.#eventBadgeManager.getEventBadge(totalProfitMoney);
     this.#printEventBadge(eventBadge);
   }
 
@@ -63,7 +56,7 @@ class RestaurantController {
 
   async #getVisitDate() {
     const inputFuction = async () => {
-      const dateInput = await InputView.readDate();
+      const dateInput = await this.#inputView.readDate();
       const visitDate = new CustomDate(2023, 12, Number(dateInput));
       return visitDate;
     };
@@ -75,12 +68,12 @@ class RestaurantController {
 
   async #getOrder(visitDate) {
     const inputFuction = async () => {
-      const orderMenuInput = await InputView.readOrderMenu();
+      const orderMenuInput = await this.#inputView.readOrderMenu();
 
       const orderMenuList = orderMenuInput.split(',');
       const orderMenu = orderMenuList.map((menu) => {
         const [name, count] = menu.split('-');
-        const food = Menu.getFood(name);
+        const food = this.#menu.getFood(name);
         return { food, count: Number(count) };
       });
 
@@ -99,22 +92,22 @@ class RestaurantController {
       name: foodList.food.getName(),
       count: foodList.count,
     }));
-    OutputView.printMenu(orderMenuData);
-    OutputView.printLine();
+    this.#outputView.printMenu(orderMenuData);
+    this.#outputView.printLine();
   }
 
   #printEventPreview(visitDate) {
     const month = visitDate.getMonth();
     const day = visitDate.getDay();
-    OutputView.printEventPreview(month, day);
-    OutputView.printLine();
+    this.#outputView.printEventPreview(month, day);
+    this.#outputView.printLine();
   }
 
   #printTotalOrderPrice(order) {
     const totalOrderMoney = order.getTotalMoney();
     const totalOrderPrice = totalOrderMoney.getPrice();
-    OutputView.printTotalOrderPrice(totalOrderPrice);
-    OutputView.printLine();
+    this.#outputView.printTotalOrderPrice(totalOrderPrice);
+    this.#outputView.printLine();
   }
 
   #printGiftMenu(gifts) {
@@ -122,8 +115,8 @@ class RestaurantController {
       name: item.gift.getName(),
       count: item.count,
     }));
-    OutputView.printGiftMenu(giftsData);
-    OutputView.printLine();
+    this.#outputView.printGiftMenu(giftsData);
+    this.#outputView.printLine();
   }
 
   #printBenefitDetails(discountResult) {
@@ -138,21 +131,21 @@ class RestaurantController {
 
       return { name: discount.name, amount: money.getPrice() };
     });
-    OutputView.printBenefitDetails(discountDatas);
-    OutputView.printLine();
+    this.#outputView.printBenefitDetails(discountDatas);
+    this.#outputView.printLine();
   }
 
   #printTotalBenefit(totalProfitMoney) {
     const totalProfitPrice = totalProfitMoney.getPrice();
-    OutputView.printTotalBenefit(totalProfitPrice);
-    OutputView.printLine();
+    this.#outputView.printTotalBenefit(totalProfitPrice);
+    this.#outputView.printLine();
   }
 
   #printFinalPaymentPrice(order, totalDiscountMoney) {
     const finalPaymentMoney = order.getTotalMoney().minus(totalDiscountMoney);
     const finalPaymentPrice = finalPaymentMoney.getPrice();
-    OutputView.printFinalPaymentPrice(finalPaymentPrice);
-    OutputView.printLine();
+    this.#outputView.printFinalPaymentPrice(finalPaymentPrice);
+    this.#outputView.printLine();
   }
 
   #printEventBadge(eventBadge) {
@@ -160,7 +153,7 @@ class RestaurantController {
     if (eventBadge) {
       eventBadgeName = eventBadge.getName();
     }
-    OutputView.printEventBadge(eventBadgeName);
+    this.#outputView.printEventBadge(eventBadgeName);
   }
 }
 
