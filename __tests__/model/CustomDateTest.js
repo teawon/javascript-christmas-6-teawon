@@ -1,5 +1,5 @@
 import CustomDate from '../../src/model/CustomDate.js';
-
+import { DAYS_OF_WEEK } from '../../src/constants.js';
 describe('CustomDate 모델 테스트', () => {
   test('유효한 날짜 정보가 들어오면, 해당 정보를 가진 객체를 생성한다', () => {
     // given
@@ -34,7 +34,7 @@ describe('CustomDate 모델 테스트', () => {
     const YEAR = 2023;
     const MONTH = 11;
     const DAY = 13;
-    const DAY_OF_WEEK = '월';
+    const DAY_OF_WEEK = DAYS_OF_WEEK.monday;
     const customDate = new CustomDate(YEAR, MONTH, DAY);
 
     // when
