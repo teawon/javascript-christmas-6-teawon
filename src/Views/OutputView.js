@@ -40,12 +40,10 @@ const OutputView = {
 
   printBenefitDetails(discountDatas) {
     Console.print(OUTPUT_MESSAGE.benefitDetailsHeader);
-
     if (discountDatas.length === 0) {
       Console.print(OUTPUT_MESSAGE.notExist);
       return;
     }
-
     discountDatas.forEach((discount) => {
       Console.print(
         OUTPUT_MESSAGE.benefitDetail(
@@ -75,7 +73,6 @@ const OutputView = {
     if (!eventBadgeName) {
       Console.print(OUTPUT_MESSAGE.notExist);
     }
-
     Console.print(eventBadgeName);
   },
 

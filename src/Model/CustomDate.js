@@ -1,5 +1,6 @@
 import RestaurantValidator from '../RestaurantValidator.js';
 import { DAYS_OF_WEEK } from '../constants.js';
+
 class CustomDate {
   #date;
 

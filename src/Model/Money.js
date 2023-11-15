@@ -1,4 +1,5 @@
 import RestaurantValidator from '../RestaurantValidator.js';
+
 class Money {
   #price;
 

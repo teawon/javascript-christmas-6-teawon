@@ -1,3 +1,1 @@
-export const formatNumberToKRW = (number) => {
-  return number.toLocaleString('ko-KR');
-};
+export const formatNumberToKRW = (number) => number.toLocaleString('ko-KR');

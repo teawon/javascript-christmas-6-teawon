@@ -1,5 +1,6 @@
 import RestaurantValidator from '../RestaurantValidator.js';
 import { MENU_TYPES } from '../constants.js';
+
 class Food {
   static MENU_TYPES = [
     MENU_TYPES.appetizer,
@@ -9,7 +10,9 @@ class Food {
   ];
 
   #name;
+
   #money;
+
   #type;
 
   constructor(name, money, type) {

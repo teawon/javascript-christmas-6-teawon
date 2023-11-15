@@ -5,6 +5,7 @@ class Order {
   static MAX_ORDER_COUNT = 20;
 
   #foodList;
+
   #date;
 
   constructor(foodList, date) {
@@ -19,9 +20,10 @@ class Order {
   }
 
   #getTotalOrderCount(foodList) {
-    return foodList.reduce((totalOrderCount, item) => {
-      return totalOrderCount + item.count;
-    }, 0);
+    return foodList.reduce(
+      (totalOrderCount, item) => totalOrderCount + item.count,
+      0,
+    );
   }
 
   getTotalMoney() {

@@ -1,5 +1,6 @@
 import Badge from './Badge.js';
 import { BADGE_TYPES } from '../constants.js';
+
 class EventBadgeManager {
   static getEventBadge(totalBenefitMoney) {
     const totalBenefitPrice = totalBenefitMoney.getPrice();
