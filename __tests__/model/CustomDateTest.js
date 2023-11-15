@@ -60,6 +60,22 @@ describe('CustomDate 모델 테스트', () => {
     expect(isEqual2).toBe(false);
   });
 
+  test('두 날짜 정보를 비교할 때 같은 타입이 아니라면 에러가 발생한다', () => {
+    // given
+    const date = new CustomDate(2023, 11, 15);
+    const otherDate = new Date(2023, 11, 15);
+
+    // when
+    const action = () => {
+      date.equal(otherDate);
+    };
+
+    // then
+    expect(action).toThrow(
+      '[ERROR] 유효하지 않은 CustomDateObject 객체입니다.',
+    );
+  });
+
   test('주어진 날짜가 주말인지 평일인지 확인한다', () => {
     // given
     const weekendDate = new CustomDate(2023, 11, 11); // 토요일
