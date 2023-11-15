@@ -2,78 +2,62 @@ import ValidationUtils from './Utils/ValidationUtils.js';
 import { ERROR_MESSAGE } from './message.js';
 import { MENU_TYPES } from './constants.js';
 
+const {
+  validateNotNull,
+  validateTypeCheck,
+  validateMaxLen,
+  validateMinLen,
+  validateIncluded,
+  validateNotDuplicate,
+} = ValidationUtils;
+
 const RestaurantValidator = {
   validateBadgeModel(name) {
-    ValidationUtils.validateNotNull(name, ERROR_MESSAGE.emptyBadge);
+    validateNotNull(name, ERROR_MESSAGE.emptyBadge);
   },
 
   validateCustomDateModel(year, month, day) {
     const date = new Date(year, month - 1, day);
-    if (
-      date.getFullYear() !== year ||
-      date.getMonth() + 1 !== month ||
-      date.getDate() !== day
-    ) {
+    const isYearValid = date.getFullYear() === year;
+    const isMonthValid = date.getMonth() + 1 === month;
+    const isDayValid = date.getDate() === day;
+
+    if (!isYearValid || !isMonthValid || !isDayValid) {
       throw new Error(ERROR_MESSAGE.invalidDate);
     }
   },
 
   validateFoodModel(name, type, menuType) {
-    ValidationUtils.validateNotNull(name, ERROR_MESSAGE.emptyMenuName);
-    ValidationUtils.validateIncluded(
-      type,
-      menuType,
-      ERROR_MESSAGE.invalidMenuType,
-    );
+    validateNotNull(name, ERROR_MESSAGE.emptyMenuName);
+    validateIncluded(type, menuType, ERROR_MESSAGE.invalidMenuType);
   },
 
   validateExistMenu(menu) {
-    ValidationUtils.validateNotNull(menu, ERROR_MESSAGE.nonexistentMenu);
+    validateNotNull(menu, ERROR_MESSAGE.nonexistentMenu);
   },
 
   validateMoneyModel(price) {
-    ValidationUtils.validateMinLen(price, 0, ERROR_MESSAGE.negativePrice);
+    validateMinLen(price, 0, ERROR_MESSAGE.negativePrice);
   },
 
   validateMoneyType(money, moneyType) {
-    ValidationUtils.validateTypeCheck(
-      money,
-      moneyType,
-      ERROR_MESSAGE.invalidMoneyObject,
-    );
+    validateTypeCheck(money, moneyType, ERROR_MESSAGE.invalidMoneyObject);
   },
 
   validateCustomDateType(date, dateType) {
-    ValidationUtils.validateTypeCheck(
-      date,
-      dateType,
-      ERROR_MESSAGE.invalidCustomDateObject,
-    );
+    validateTypeCheck(date, dateType, ERROR_MESSAGE.invalidCustomDateObject);
   },
 
   validateOrderModel(foodList, orderMenuCount, maxCount) {
-    ValidationUtils.validateMaxLen(
-      orderMenuCount,
-      maxCount,
-      ERROR_MESSAGE.orderCountExceeded,
-    );
-
-    ValidationUtils.validateMinLen(
-      foodList.length,
-      1,
-      ERROR_MESSAGE.noMenuOrdered,
-    );
+    validateMaxLen(orderMenuCount, maxCount, ERROR_MESSAGE.orderCountExceeded);
+    validateMinLen(foodList.length, 1, ERROR_MESSAGE.noMenuOrdered);
 
     const menuNames = foodList.map((item) => item.food.getName());
-    ValidationUtils.validateNotDuplicate(
-      menuNames,
-      ERROR_MESSAGE.duplicateMenu,
-    );
+    validateNotDuplicate(menuNames, ERROR_MESSAGE.duplicateMenu);
 
     if (foodList.every((item) => item.food.getType() === MENU_TYPES.beverage)) {
       throw new Error(ERROR_MESSAGE.beverageOnly);
     }
-
     if (foodList.some((item) => item.count < 1)) {
       throw new Error(ERROR_MESSAGE.minimumOneMenu);
     }
