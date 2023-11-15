@@ -7,9 +7,13 @@ import { ERROR_MESSAGE } from '../message.js';
 
 class RestaurantController {
   #menu;
+
   #eventBadgeManager;
+
   #discountEvents;
+
   #outputView;
+
   #inputView;
 
   constructor(menu, eventBadgeManager, discountEvents, outputView, inputView) {
@@ -24,14 +28,12 @@ class RestaurantController {
     this.#outputView.printWelcome();
     const visitDate = await this.#getVisitDate();
     const order = await this.#getOrder(visitDate);
-
     this.#printEventPreview(visitDate);
     this.#printMenu(order);
     this.#printTotalOrderPrice(order);
 
     const { totalProfitMoney, totalDiscountMoney } =
       this.#calculateAndPrintDiscounts(order);
-
     this.#printFinalPaymentPrice(order, totalDiscountMoney);
 
     const eventBadge = this.#eventBadgeManager.getEventBadge(totalProfitMoney);
@@ -42,13 +44,11 @@ class RestaurantController {
     const discountManager = new DiscountManager(order, this.#discountEvents);
     const discountResult = discountManager.getDiscountResults();
     const gifts = discountManager.getGifts(discountResult);
-
     this.#printGiftMenu(gifts);
     this.#printBenefitDetails(discountResult);
 
     const { totalDiscountMoney, totalGiftMoney } =
       discountManager.calculateTotalDiscount(discountResult);
-
     const totalProfitMoney = totalDiscountMoney.add(totalGiftMoney);
     this.#printTotalBenefit(totalProfitMoney);
 
@@ -56,40 +56,38 @@ class RestaurantController {
   }
 
   async #getVisitDate() {
-    const inputFuction = async () => {
+    const inputFunction = async () => {
       const dateInput = await this.#inputView.readDate();
       const visitDate = new CustomDate(2023, 12, Number(dateInput));
       return visitDate;
     };
 
-    return await getInputWithValidation(
-      inputFuction,
-      ERROR_MESSAGE.enterVisitDate,
-    );
+    return getInputWithValidation(inputFunction, ERROR_MESSAGE.enterVisitDate);
   }
 
   async #getOrder(visitDate) {
-    const inputFuction = async () => {
+    const inputFunction = async () => {
       const orderMenuInput = await this.#inputView.readOrderMenu();
-      const orderMenuList = orderMenuInput.split(',');
-      const orderMenu = orderMenuList.map((menu) => {
-        const [name, count] = menu.split('-');
-        const food = this.#menu.getFood(name);
-        return { food, count: Number(count) };
-      });
-
-      const order = new Order(orderMenu, visitDate);
-      return order;
+      const orderMenu = this.#parseOrderMenu(orderMenuInput);
+      return new Order(orderMenu, visitDate);
     };
 
-    return await getInputWithValidation(inputFuction, ERROR_MESSAGE.enterOrder);
+    return getInputWithValidation(inputFunction, ERROR_MESSAGE.enterOrder);
+  }
+
+  #parseOrderMenu(orderMenuInput) {
+    return orderMenuInput.split(',').map((menu) => {
+      const [name, count] = menu.split('-');
+      const food = this.#menu.getFood(name);
+      return { food, count: Number(count) };
+    });
   }
 
   #printMenu(order) {
     const foodList = order.getFoodList();
-    const orderMenuData = foodList.map((foodList) => ({
-      name: foodList.food.getName(),
-      count: foodList.count,
+    const orderMenuData = foodList.map((item) => ({
+      name: item.food.getName(),
+      count: item.count,
     }));
     this.#outputView.printMenu(orderMenuData);
     this.#outputView.printLine();
