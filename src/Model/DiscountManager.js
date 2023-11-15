@@ -2,6 +2,7 @@ import Money from './Money.js';
 
 class DiscountManager {
   #order;
+
   #discountEvents;
 
   constructor(order, discountEvents) {
@@ -10,22 +11,21 @@ class DiscountManager {
   }
 
   getDiscountResults() {
-    let discountResults = [];
-    for (const event of this.#discountEvents) {
-      if (!event.isApplicable(this.#order)) continue;
+    const discountResults = [];
+    this.#discountEvents.forEach((event) => {
+      if (!event.isApplicable(this.#order)) return;
 
       const details = event.getDiscountDetails(this.#order);
-
       discountResults.push({
         name: details.name,
         content: details.content,
       });
-    }
+    });
     return discountResults;
   }
 
   getGifts(discountResults) {
-    let gifts = [];
+    const gifts = [];
 
     discountResults.forEach((discount) => {
       if (discount.content.gift) {
