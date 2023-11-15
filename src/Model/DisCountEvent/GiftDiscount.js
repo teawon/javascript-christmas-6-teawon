@@ -5,10 +5,13 @@ import { EVENT_NAMES, MENU_NAMES } from '../../constants.js';
 
 class GiftDiscount extends DiscountEvent {
   static GIFT_ITEM = MENU_NAMES.champagne;
+
   static GIFT_COUNT = 1;
+
   static CONDITION_AMOUNT = 120_000;
 
   #eventName;
+
   #appliedPeriod;
 
   constructor() {
@@ -22,11 +25,9 @@ class GiftDiscount extends DiscountEvent {
 
   isApplicable(order) {
     const orderDate = order.getDate();
+    const { start, end } = this.#appliedPeriod;
 
-    if (
-      !orderDate.isBetween(this.#appliedPeriod.start, this.#appliedPeriod.end)
-    )
-      return false;
+    if (!orderDate.isBetween(start, end)) return false;
     if (order.getTotalMoney().getPrice() < GiftDiscount.CONDITION_AMOUNT)
       return false;
 

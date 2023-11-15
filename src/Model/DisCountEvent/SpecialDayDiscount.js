@@ -16,6 +16,7 @@ class SpecialDayDiscount extends DiscountEvent {
   static DISCOUNT_AMOUNT = 1000;
 
   #eventName;
+
   #appliedPeriod;
 
   constructor() {
@@ -29,11 +30,9 @@ class SpecialDayDiscount extends DiscountEvent {
 
   isApplicable(order) {
     const orderDate = order.getDate();
+    const { start, end } = this.#appliedPeriod;
 
-    if (
-      !orderDate.isBetween(this.#appliedPeriod.start, this.#appliedPeriod.end)
-    )
-      return false;
+    if (!orderDate.isBetween(start, end)) return false;
     if (order.getTotalMoney().getPrice() < 10000) return false;
 
     if (!SpecialDayDiscount.SPECIAL_DAY.some((day) => day.equal(orderDate)))
