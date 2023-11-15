@@ -11,7 +11,6 @@ export const OUTPUT_MESSAGE = Object.freeze({
   benefitDetail: (name, amount) => `${name}: -${amount}원`,
   notExist: '없음',
   benefitDetailsHeader: '<혜택 내역>',
-  benefitDetail: (name, amount) => `${name}: -${amount}원`,
   totalBenefitHeader: '<총혜택 금액>',
   finalPaymentPriceHeader: '<할인 후 예상 결제 금액>',
   eventBadgeHeader: '<12월 이벤트 배지>',
