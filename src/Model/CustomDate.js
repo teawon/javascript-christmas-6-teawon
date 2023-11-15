@@ -9,12 +9,28 @@ class CustomDate {
     this.#date = new Date(year, monthIndex, day);
   }
 
-  equal(other) {
-    if (this.#date.getFullYear() !== other.getDate().getFullYear())
+  equal(otherDate) {
+    RestaurantValidator.validateCustomDateType(otherDate, CustomDate);
+    if (this.#date.getFullYear() !== otherDate.getDate().getFullYear())
       return false;
-    if (this.#date.getMonth() !== other.getDate().getMonth()) return false;
-    if (this.#date.getDate() !== other.getDate().getDate()) return false;
+    if (this.#date.getMonth() !== otherDate.getDate().getMonth()) return false;
+    if (this.#date.getDate() !== otherDate.getDate().getDate()) return false;
 
+    return true;
+  }
+
+  calculateDiff(otherDate) {
+    RestaurantValidator.validateCustomDateType(otherDate, CustomDate);
+    const oneDay = 24 * 60 * 60 * 1000;
+    const difference = otherDate.getDate() - this.#date;
+    return Math.abs(Math.round(difference / oneDay));
+  }
+
+  isBetween(startDate, endDate) {
+    RestaurantValidator.validateCustomDateType(startDate, CustomDate);
+    RestaurantValidator.validateCustomDateType(endDate, CustomDate);
+    if (startDate.getDate() > this.#date) return false;
+    if (endDate.getDate() < this.#date) return false;
     return true;
   }
 
@@ -35,12 +51,6 @@ class CustomDate {
     return !this.isWeekend();
   }
 
-  isBetween(startDate, endDate) {
-    if (startDate.getDate() > this.#date) return false;
-    if (endDate.getDate() < this.#date) return false;
-    return true;
-  }
-
   getDate() {
     return this.#date;
   }
@@ -51,12 +61,6 @@ class CustomDate {
 
   getDay() {
     return this.#date.getDate();
-  }
-
-  calculateDiff(otherDate) {
-    const oneDay = 24 * 60 * 60 * 1000;
-    const difference = otherDate.getDate() - this.#date;
-    return Math.abs(Math.round(difference / oneDay));
   }
 }
 

@@ -43,6 +43,14 @@ const RestaurantValidator = {
     );
   },
 
+  validateCustomDateType(date, dateType) {
+    ValidationUtils.validateTypeCheck(
+      date,
+      dateType,
+      ERROR_MESSAGE.invalidCustomDateObject,
+    );
+  },
+
   validateOrderModel(foodList, orderMenuCount, maxCount) {
     ValidationUtils.validateMaxLen(
       orderMenuCount,
